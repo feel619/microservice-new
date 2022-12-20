@@ -1,0 +1,13 @@
+{{#response}}
+<div class="answer {{created_by| IsUser}}">
+    <div class="avatar">
+        <i class="fa fa-user-circle-o"></i>
+        <div class="status "></div>
+    </div>
+    <div class="name">{{name}}</div>
+    <div class="text">
+        {{message}}
+    </div>
+    <div class="time">{{created_at| date}}</div>
+</div>
+{{/response}}

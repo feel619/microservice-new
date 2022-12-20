@@ -1,0 +1,19 @@
+{{#bottomView}}
+    <div class="chat-box-btn {{user_type}} {{isAccept}} child_chat_{{id}}" id="pub_{{id}}" title="{{id}}">
+{{/bottomView}}
+{{^bottomView}}
+    <div class="chat-box-btn {{user_type}} {{isAccept}} child_chat_{{id}}" id="pub_child_{{id}}" title="{{id}}">
+{{/bottomView}}
+    <div class="d-flex align-items-center call-box1" title="{{id}}" data-id="{{id}}" >
+        <div id="call_{{id}}">
+            <div class="avatar {{onStatus}}">
+                <i class="fa fa-phone-square"></i>
+            </div>
+        </div>
+        <div id="chat_sign_{{id}}" >
+            <h5>{{callBoxName}}</h5>
+            <p>Ph: {{phone}}</p>
+            <p class="chat_time_{{id}}" {{^bottomView}}id="chat_bottom_time_{{id}}"{{/bottomView}} ></p>
+        </div>
+    </div>
+</div>

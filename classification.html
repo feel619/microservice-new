@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="vendors/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="vendors/data-table/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="vendors/sweet-alert/sweetalert.css"/>
+    <link rel="stylesheet" href="vendors/select2/select2.min.css"/>
+    <link rel="stylesheet" href="vendors/toastr/toastr.css">
+
+    <meta name="theme-color" content="#fff">
+    <link rel="shortcut icon" href="images/fevicon.png">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Live Videos</title>
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <script>
+        var activeModule = 'classification';
+        var connection_type = 'classification';
+    </script>
+</head>
+
+<body>
+<div class="loading" id="main_loader">Connecting..</div>
+<header id="header">
+    <div class="menu-section">
+        <div class="main-menu">
+            <div class="align-items-center justify-content-between row no-gutters">
+                <div id="logo" class="logo col-auto">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="" title=""/>
+                    </a>
+                </div>
+                <nav id="nav-menu-container" class="nav-menu-container col-auto">
+
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</header>
+<div style="clear: none;"></div>
+
+<div class="container-fluid">
+    <!-- app-content-->
+    <div class="app-content  my-3 my-md-5 f-app">
+        <div class="side-app">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header custom-header">
+                            <div class="col-md-6">
+                                <h3 class="card-title">Classification</h3>
+                                <h6 class="card-subtitle">Classification Details</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-options pull-right">
+                                    <button type="button" class="btn btn-primary ml-1 classification_add_permission"
+                                            onclick="add_btn()">
+                                        <i class="fa fa-plus" style="font-size: 15px !important;"></i>Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table card-table table-striped table-vcenter table-outline table-bordered text-nowrap dataTable-tbl capitalize-letter"
+                                       id="classification_table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="border-top-0 r-size">Name</th>
+                                        <th scope="col" class="border-top-0 r-size">type</th>
+                                        <th scope="col" class="border-top-0 ">region</th>
+                                        <th scope="col" class="border-top-0 r-size">Order</th>
+                                        <th scope="col" class="border-top-0 r-size">Active</th>
+                                        <th scope="col" class="border-top-0 r-size">Action</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--End side app-->
+    </div>
+
+    <div class="card my-3 my-md-5 f-add" style="display: none;">
+        <div class="card-header">
+            <div class="card-title col-md-6">Add</div>
+            <div class="col-md-6">
+                <a class="btn btn-outline-primary pull-right backBtn">Back</a>
+            </div>
+        </div>
+        <form id="add_classification_form" autocomplete="off">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-2 col-form-label text-left text-sm-right">
+                        Name
+                    </div>
+                    <div class="col-md-5">
+                        <input id="classification_name" name="classification_name" type="text" class="form-control"
+                               placeholder="Name">
+                        <div class="hidden_field"></div>
+                        <strong class="text-danger classification_name"></strong>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 col-form-label text-left text-sm-right">
+                        Type
+                    </div>
+                    <div class="col-md-5 position-relative">
+                        <select class="form-control" name="classification_type" id="classification_type">
+                            <option value="1" data-name="Emergency">Emergency</option>
+                            <option value="2" data-name="Non Emergency">Non Emergency</option>
+                            <option value="3" data-name="Incidental">Incidental</option>
+                            <option value="4" data-name="Roadside Assistance">Roadside Assistance</option>
+                        </select>
+                        <strong class="text-danger classification_type"></strong>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 col-form-label text-left text-sm-right">
+                        Order
+                    </div>
+                    <div class="col-md-5">
+                        <input type="number" name="classification_order" id="classification_order" placeholder="Order"
+                               class="form-control integer required"/>
+                        <strong class="text-danger classification_order"></strong>
+                    </div>
+                </div>
+                <div class="row mb-3" id="region_view">
+                    <div class="col-md-2 col-form-label text-left text-sm-right">
+                        Region
+                    </div>
+                    <div class="col-md-5">
+                        <input type="checkbox" id="selectAllCheckbox" >Select All
+                        <select class="form-control" multiple="multiple" style="width: 100%;text-transform:capitalize;"
+                                name="classification_region" id="region_id"></select>
+                        <strong class="text-danger classification_region"></strong>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn bg-lime pull-right">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="footer py-2 mt-3">
+    <p class="text-center m-0">Copyright ©
+        <script>document.write(new Date().getFullYear());</script>
+        <a href="https://www.caseemergencysystems.com/" target="_blank">Case Answer System</a>. All
+        rights reserved.
+    </p>
+</div>
+<div id="resetPasswordModal"></div>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-2.2.4.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+
+<!-- Menu -->
+<script src="js/superfish.min.js"></script>
+<!--Encrption-->
+<script src="js/aos.js"></script>
+<script src="js/aes.js"></script>
+<!-- AWS SDK's-->
+<script src="js/aws/amazon-cognito-auth.min.js"></script>
+<script src="js/aws/aws-sdk-2.7.16.min.js"></script>
+<script src="js/aws/amazon-cognito-identity.min.js"></script>
+<script src="js/aws/config.js"></script>
+<script src="vendors/mustache/mustache.js"></script>
+<script src="vendors/mustache/mustache-wax.js"></script>
+<!-- Basic js-->
+<script src="js/main.js"></script>
+<script src="js/crypto.js"></script>
+<script src="vendors/data-table/jquery.dataTables.min.js"></script>
+<script src="vendors/select2/select2.full.min.js"></script>
+<script src="vendors/sweet-alert/sweetalert.js"></script>
+<script src="vendors/toastr/toastr.min.js"></script>
+<script src="js/modules/classification.js"></script>
+<script src="js/reset_password.js"></script>
+
+</body>
+
+</html>

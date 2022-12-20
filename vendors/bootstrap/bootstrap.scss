@@ -1,0 +1,17 @@
+$theme-colors: (
+  "primary": #0054a6,
+  "secondary": #e1e8ee,
+  "light":#f3f7fb
+);
+
+$container-max-widths: (
+md: 720px,
+lg: 960px,
+xl: 1300px
+);
+
+$text-muted:#606c74;
+
+// Bootstrap and its default variables
+@import "scss/bootstrap";
+

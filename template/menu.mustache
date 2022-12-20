@@ -1,0 +1,61 @@
+<ul class="nav-menu">
+    <li class="{{module.home | ActiveTab}}"><a href="index.html">Main</a></li>
+<!--    <li class="{{module.replay | ActiveTab}}"><a href="replay.html">Replay</a></li>-->
+    <li class='menu-has-children {{module.caseAlertRealTime | ActiveTab}}'>
+        <a href="caseAlertRealTime.html">Reports</a>
+        <ul>
+            <li class="user_role_permission {{module.caseReports | ActiveTab}}"><a href="caseAlertClassic.html">Knightscope Alerts Classic</a></li>
+            <li class="user_role_permission {{module.caseAlertRealTime | ActiveTab}}"><a href="caseAlertRealTime.html">Knightscope Alerts
+                Real-time</a></li>
+            <li class="user_role_permission {{module.callCount | ActiveTab}} disabled">
+                <a href="callCount.html" >System Availability</a>
+            </li>
+            <li class="user_role_permission {{module.trafficMonitor | ActiveTab}}"><a href="trafficMonitor.html">
+                Traffic Monitor</a></li>
+            <li class="user_role_permission {{module.caseHistory | ActiveTab}} disabled">
+                <a href="#" class="disabled" data-placement="top" data-toggle="tooltip" data-html="true"
+                   title="coming soon">Knightscope Alerts History - Coming Soon</a>
+            </li>
+            <li class="user_role_permission {{module.caseSummary | ActiveTab}} disabled">
+                <a href="#" class="disabled" data-placement="top" data-toggle="tooltip" data-html="true"
+                   title="coming soon">Knightscope Call Summary - Coming Soon</a>
+            </li>
+           <!-- <li class="admin_role_permission {{module.systemAvailability | ActiveTab}}"><a href="systemAvailability.html" class="">System
+                Availability</a></li>-->
+            <li class="admin_role_permission {{module.cbMessageLog | ActiveTab}}"><a href="cbMessageLog.html" class="">View
+                Log</a></li>
+        </ul>
+    </li>
+
+    <li class='user_role_permission menu-has-children {{module.admin | ActiveTab}}'>
+        <a href="admin.html">Admin</a>
+        <ul>
+            <li class="user_role_permission {{module.admin | ActiveTab}}"><a href="admin.html">User</a></li>
+            <li class="admin_role_permission {{module.region | ActiveTab}}"><a href="region.html">Region</a></li>
+            <li class="admin_role_permission {{module.callbox | ActiveTab}}"><a href="callbox.html" class="">Call
+                Box</a></li>
+            <!-- <li class="admin_role_permission {{module.cbMessageLog | ActiveTab}}"><a href="cbMessageLog.html" class="">CB Message Log</a></li>-->
+            <li class="admin_role_permission {{module.shortcut | ActiveTab}} "><a href="shortcut.html">ShortCut Keys</a>
+           <!-- <li class="admin_role_permission {{module.firmwareRepository | ActiveTab}} "><a href="firmwareRepository.html">Firmware Repository</a>-->
+            <li class="admin_role_permission {{module.callBoxCommanding | ActiveTab}} "><a href="firmwareRepository.html">CallBox Command and Control</a>
+            <!--<li class="admin_role_permission {{module.systemCodeConfiguration | ActiveTab}} "><a href="systemCodeConfiguration.html">System Code Configuration</a>-->
+            </li>
+        </ul>
+    </li>
+    <li class='menu-has-children'>
+        <a href="#">Support</a>
+        <ul>
+            <li class=""><a href="images/CASE_Cloud_TTY_Training_Manual.pdf" target="_blank">Training Manual</a></li>
+            <li class=""><a id="mailTo">Contract Support Team</a></li>
+        </ul>
+    </li>
+    <li class="menu-has-children">
+        <img src="images/profile-pic.png" alt="" title="" width="50px"/>
+        <ul class="dropdown-menu-right">
+            <li><a href="profile.html" id="auth_username"></a></li>
+            <li><a id="reset_password">Reset Password</a></li>
+            <li><a id="auth_logout"><b>Logout</b></a></li>
+        </ul>
+    </li>
+</ul>
+

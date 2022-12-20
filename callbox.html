@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="vendors/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="vendors/toastr/toastr.css">
+    <link rel="stylesheet" href="vendors/data-table/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="vendors/sweet-alert/sweetalert.css"/>
+
+    <meta name="theme-color" content="#fff">
+    <link rel="shortcut icon" href="images/fevicon.png">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Live Videos</title>
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <script>
+        var activeModule = 'callbox';
+        var connection_type = 'callbox';
+    </script>
+</head>
+
+<body>
+<div class="loading" id="main_loader">Connecting..</div>
+<header id="header">
+    <div class="menu-section">
+        <div class="main-menu">
+            <div class="align-items-center justify-content-between row no-gutters">
+                <div id="logo" class="logo col-auto">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="" title=""/>
+                    </a>
+                </div>
+                <nav id="nav-menu-container" class="nav-menu-container col-auto"></nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div style="clear: none;"></div>
+
+<div class="container-fluid">
+
+    <div class="app-content  my-3 my-md-5 call_box_table_div d-none">
+        <div class="side-app">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-header custom-header">
+                            <div class="row w-100 justify-content-between">
+                                <div class="col-md-auto col-12">
+                                    <h3 class="card-title">Call Box </h3>
+                                    <h6 class="card-subtitle">call box Details</h6>
+                                </div>
+                                <div class="col-md-auto col-12">
+                                    <div class="card-options">
+                                        <div class="row">
+                                            <div class="col-sm-auto col-12" id="desktop-region">
+                                                <div class="row no-gutters align-items-center">
+                                                    <h6 class="region-text col-auto">Region:</h6>
+                                                    <div class="region-filter-head col">
+                                                        <select class="form-control" name="region_box"
+                                                                id="admin_region_box">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-auto col-12">
+                                                <div class="row no-gutters">
+                                                    <div class="col-sm-auto col-12 ml-sm-1 mt-1 mt-sm-0">
+                                                        <div class="upload-btn-wrapper  w-100">
+                                                            <button class="btn btn-primary admin_role_permission btn-block edit-regions"
+                                                                    onclick="prev_next_btn(3)">
+                                                                <i class="fa fa-edit"
+                                                                   style="font-size: 15px !important;"></i>
+                                                                Edit Region
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-auto col-12 ml-sm-1 mt-1 mt-sm-0">
+                                                        <div class="upload-btn-wrapper admin_role_permission w-100">
+                                                            <button class="btn btn-primary btn-block"
+                                                                    onclick="openCsvModal()">
+                                                                <i class="fa fa-cloud-upload"
+                                                                   style="font-size: 15px !important;"></i>
+                                                                Import Region
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-auto col-12 ml-sm-1 mt-1 mt-sm-0">
+                                                        <div class="upload-btn-wrapper admin_role_permission w-100">
+                                                            <button name="export_csv" id="export_csv"
+                                                                    class="btn btn-primary export_csv btn-block">
+                                                                <i class="fa fa-cloud-download"
+                                                                   style="font-size: 15px !important;"></i>
+                                                                Export Region
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-auto col-12 ml-sm-1 mt-1 mt-sm-0">
+                                                        <div class="upload-btn-wrapper  w-100">
+                                                            <a class="btn btn-primary admin_role_permission btn-block edit-group"
+                                                               href="csvRollback.html">
+                                                                <i class="fa fa-external-link"
+                                                                   style="font-size: 15px !important;"></i>csv Rollback
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-auto col-12 ml-sm-1 mt-1 mt-sm-0">
+                                                        <div class="upload-btn-wrapper  w-100">
+                                                            <button type="button"
+                                                                    class="btn btn-primary admin_role_permission btn-block"
+                                                                    onclick="addCallBox()">
+                                                                <i class="fa fa-plus"
+                                                                   style="font-size: 15px !important;"></i>Add Call Box
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-auto col-12 ml-sm-1 mt-1 mt-sm-0">
+                                                        <div class="upload-btn-wrapper  w-100">
+                                                            <button type="button" onclick="instructionModalOpen()"
+                                                                    class="btn btn-info" id="start">
+                                                                <i class="fa fa-info-circle"
+                                                                   style="font-size: 15px !important;"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="c-table-action">
+                                <div class="row justify-content-between">
+                                    <div class="col-auto">
+                                        <div class="d-flex align-items-center">
+                                            <label class="mr-2 mb-2">Status:</label>
+                                            <div class="btn-group" role="group"
+                                                 aria-label="Basic radio toggle button group">
+                                                <input type="radio" class="btn-check status_switch" name="status_switch"
+                                                       id="status_switch_1" autocomplete="off" checked value="1">
+                                                <label class="btn-first btn btn-sm btn-outline-primary"
+                                                       for="status_switch_1">Active</label>
+                                                <input type="radio" class="btn-check status_switch" name="status_switch"
+                                                       id="status_switch_2" autocomplete="off" value="2">
+                                                <label class="btn btn-sm  btn-outline-primary" for="status_switch_2">In-active</label>
+                                                <input type="radio" class="btn-check status_switch" name="status_switch"
+                                                       id="status_switch_3" autocomplete="off" value="3">
+                                                <label class="btn-last btn btn-sm  btn-outline-primary"
+                                                       for="status_switch_3">Deleted</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="d-flex align-items-center">
+                                            <label class="mr-2 mb-2">Missing Lat/Lon:</label>
+                                            <div class="material-switch">
+                                                <input id="lat_long_switch" name="lat_long_switch" class="checked-box"
+                                                       type="checkbox" value="1">
+                                                <label for="lat_long_switch" class="label-primary"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="d-flex align-items-center">
+                                            <label class="mr-2 mb-2">Search:</label>
+                                            <input id="call_box_search" name="call_box_search" class="form-control" type="text"
+                                                   value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive mt-5">
+                                <table class="table card-table table-striped table-vcenter table-outline table-bordered text-nowrap dataTable-tbl "
+                                       id="callBox_table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="border-top-0 r-size">Account No</th>
+                                        <th scope="col" class="border-top-0 r-size">Account Name</th>
+                                        <th scope="col" class="border-top-0 r-size">Ani</th>
+                                        <th scope="col" class="border-top-0 r-size">Box number</th>
+                                        <th scope="col" class="border-top-0 ">Description</th>
+                                        <th scope="col" class="border-top-0 r-size">lat</th>
+                                        <th scope="col" class="border-top-0 r-size">lon</th>
+                                        <th scope="col" class="border-top-0 r-size">phone</th>
+                                        <th scope="col" class="border-top-0 r-size">Call in time</th>
+                                        <th scope="col" class="border-top-0 r-size">Fail to check in frequency</th>
+                                        <th scope="col" class="border-top-0 r-size">Active</th>
+                                        <th scope="col" class="border-top-0 r-size">1st P Message Received?</th>
+                                        <th scope="col" class="border-top-0 r-size">Action</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card my-3 my-md-5 f-add call_box_form_div d-none">
+        <div class="card-header">
+            <div class="row no-gutters w-100 align-items-center justify-content-between">
+                <div class="card-title col-auto form_header">Add</div>
+                <div class="col-auto">
+                    <div class="d-flex">
+                        <div class="ml-2 add_call_box_btn d-none">
+                            <a class="btn btn-outline-primary admin_role_permission" onclick="addCallBox()">Add Callbox</a>
+                        </div>
+                        <div class="ml-2">
+                            <a class="btn btn-outline-primary pull-right backBtn">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form id="add_call_box_form">
+            <input type="hidden" id="timezone">
+            <div class="card-body">
+                <div class="row mb-6">
+                    <div class="col-md-6">
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="position-relative mt-3">
+                                    <div class="mapCbtn">
+                                        <div class="row flex-lg-column justify-content-between align-items-center">
+                                            <div class="col-auto">
+                                                <div class="d-flex mb-1 map_zoom_in_out_div d-none">
+                                                    <div class="">
+                                                        <a class="btn btn-sm btn-outline-primary zoom-In"
+                                                           onclick="zoom_out('IN')">Zoom In</a>
+                                                    </div>
+                                                    <div class="ml-2">
+                                                        <a class="btn btn-sm btn-outline-primary zoom-out"
+                                                           onclick="zoom_out('OUT')">Zoom Out</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto ml-auto map_prev_next_div d-none">
+                                                <div class=" d-flex mb-1">
+                                                    <div class="">
+                                                        <a class="btn btn-sm btn-outline-primary prev-btn"
+                                                           onclick="prev_next_btn(1)">Prev</a>
+                                                    </div>
+                                                    <div class="ml-2">
+                                                        <a class="btn btn-sm btn-outline-primary next-btn"
+                                                           onclick="prev_next_btn(2)">Next</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="map-header">
+                                    <div class="map-header-layer" id="map_location"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Description</label>
+                                    <textarea name="description" id="description" placeholder="Description"
+                                              class="form-control required call-box-readonly"></textarea>
+                                    <strong class="text-danger description"></strong>
+                                    <div class="hidden_field"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">ANI</label>
+                                    <input type="number" name="ani_number" id="ani_number" placeholder="Ani Number"
+                                           class="form-control integer required call-box-readonly"/>
+                                    <strong class="text-danger ani_number"></strong>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Account Number</label>
+                                    <input type="text" name="account_number" id="account_number" placeholder="Account Number"
+                                           class="form-control "/>
+                                    <strong class="text-danger account_number"></strong>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Account Name</label>
+                                    <input type="text" name="account_name" id="account_name" placeholder="Account Name"
+                                           class="form-control "/>
+                                    <strong class="text-danger account_name"></strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Box Number
+                                    </label>
+                                    <input type="text" name="box_number" id="box_number" placeholder="Box Number"
+                                           class="form-control call-box-readonly"/>
+                                    <strong class="text-danger box_number"></strong>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Phone
+                                        <a style="font-size: 17px; cursor: pointer;" data-toggle="tooltip" data-html="true"
+                                           title="Phone should be at least 10 characters long">
+                                            <i class="fa fa-info-circle"></i>
+                                        </a>
+                                    </label>
+                                    <input type="text" name="phone" id="phone" placeholder="Phone"
+                                           class="form-control required call-box-readonly"/>
+                                    <strong class="text-danger phone"></strong>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Maintenance Alarm Masks</label>
+                                    <input type="text" name="maintenance_alarm_masks" id="maintenance_alarm_masks" placeholder="Maintenance Alarm Masks" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Latitude
+                                    </label>
+                                    <input type="text" name="lat" id="lat" placeholder="Latitude"
+                                           class="form-control latlong call-box-readonly"/>
+                                    <strong class="text-danger lat"></strong>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Longitude
+                                    </label>
+                                    <input type="text" name="long" id="long" placeholder="Longitude"
+                                           class="form-control latlong call-box-readonly"/>
+                                    <strong class="text-danger long"></strong>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Area Light Timeout</label>
+                                    <input type="text" name="area_light_timeout" id="area_light_timeout" placeholder="Area Light Timeout" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Call In Time</label>
+                                    <input type="text" name="call_in_time" id="call_in_time" placeholder="12:01:00 AM" class="form-control"/>
+                                    <span style="position: relative;top: -28px;left: 110px;color: gray;" id="call_in_time_zone">&nbsp;</span>
+                                    <strong class="text-danger call_in_time"></strong>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Call Retry Interval</label>
+                                    <input type="text" id="second_report_call_time" readonly class="form-control"/>
+                                    <span style="position: relative;top: -28px;left: 45px;color: gray;">Minutes</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label">Days Between Report Calls</label>
+                                    <input type="text" name="days_between_report_calls" id="days_between_report_calls" placeholder="Days Between Report Calls" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="fail_to_checkin_day">Fail To Check In Frequency</label>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <input type="number" name="fail_to_checkin_day" id="fail_to_checkin_day" value="0" min="0" max="30"
+                                                   class="form-control"/>
+                                            <div>Days</div>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <input type="number" name="fail_to_checkin_hour" id="fail_to_checkin_hour" value="0" min="0" max="23"
+                                                   class="form-control"/>
+                                            <div>Hours</div>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <input type="number" name="fail_to_checkin_minute" id="fail_to_checkin_minute" value="0" min="0" max="59"
+                                                   class="form-control"/>
+                                            <div>Minutes</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="battery_low_level">Battery Level</label>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <input type="number" name="battery_low_level" id="battery_low_level" value="0" min="0" max="98"
+                                                   class="form-control"/>
+                                            <div>Low</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <input type="number" name="battery_high_level" id="battery_high_level" value="0" min="0" max="100"
+                                                   class="form-control"/>
+                                            <div>High</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <div class="align-items-center cf_status_div d-none hide_status_switch d-flex">
+                                            <div class="material-switch mr-3">
+                                                <input name="cf_status" type="hidden" value="2">
+                                                <input id="cf_status" name="cf_status" class="checked-box" type="checkbox" value="1">
+                                                <label for="cf_status" class="label-primary"></label>
+                                            </div>
+                                            <label class="form-label"> Status(Active/In-active) </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="align-items-center cf_status_div d-none hide_status_switch d-flex">
+                                            <div class="material-switch mr-3">
+                                                <input name="is_test" type="hidden" value="0">
+                                                <input id="is_test" name="is_test" class="checked-box" type="checkbox" value="1">
+                                                <label for="is_test" class="label-primary"></label>
+                                            </div>
+                                            <label class="form-label"> Make Test call box</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="border-right: 1px solid #ddd7d7">
+                        <div class="row">
+                            <div class="col-md-12 mb-1">
+                                <h4>Configuration</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Controller Board Type :
+                                    <span class="controller_board_type font-weight-normal"/></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">TTY Equipped :
+                                    <span class="tty_equipped font-weight-normal"/></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Radio Access Technology :
+                                    <span class="rat font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">APN :
+                                    <span class="apn font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Radio Model :
+                                    <span class="radio_model font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">F/W Family :
+                                    <span class="firmware_family font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">System Configuration Code :
+                                    <span class="system_configuration_code font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Firmware Main Revision :
+                                    <span class="firmware_rev font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Firmware Radio Handler Revision :
+                                    <span class="firmware_radio_handler_revision font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Firmware Boot Revision :
+                                    <span class="firmware_boot_revision font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Firmware TTY Revision :
+                                    <span class="firmware_tty_revision font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Firmware DSP Revision :
+                                    <span class="firmware_dsp_revision font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">CB_CAM S/W Revision :
+                                    <span class="cb_cam_sw_revision font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">GPS Latitude :
+                                    <span class="cb_gps_lat font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">GPS Longitude :
+                                    <span class="cb_gps_long font-weight-normal"></span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12 mb-1">
+                                <h4>Dynamic Items</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Alarm Status : <span class="alarm_status font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Radio Temperature : <span class="radio_temperature font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Battery Voltage : <span class="battery_voltage font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Signal Quality (Ec/Io, RSRQ) : <span class="ecio font-weight-normal"></span></label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Signal Power (RSSI, RSRP) : <span class="rssi font-weight-normal"></span></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-label">Event log data : <span class="event_log_data font-weight-normal"></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer user_role_permission hide_status_switch">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn bg-lime pull-right">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card px-0 col-md-12 call_box_log_div d-none">
+        <div class="card-header">
+            <div class="row no-gutters w-100 align-items-center justify-content-between">
+                <div class="card-title col-auto" id="call_box_log_message">Call Box logs</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="app-content my-3 my-md-5">
+                <div class="side-app">
+                    <div class="table-responsive">
+                        <table style="width: 100%;"
+                               class="table card-table table-striped table-vcenter table-outline table-bordered text-nowrap dataTable-tbl "
+                               id="callBox_logs_table">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="border-top-0 r-size">Operation</th>
+                                <th scope="col" class="border-top-0 ">Value</th>
+                                <th scope="col" class="border-top-0 r-size">Updated By</th>
+                                <th scope="col" class="border-top-0 r-size">Created At</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card px-0 col-md-12 call_box_message_div d-none">
+        <div class="card-header">
+            <div class="row no-gutters w-100 align-items-center justify-content-between">
+                <div class="card-title col-auto" id="">Call Box Message</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="app-content my-3 my-md-5">
+                <div class="side-app">
+                    <div class="table-responsive">
+                        <table style="width: 100%;"
+                               class="table card-table table-striped table-vcenter table-outline table-bordered text-nowrap dataTable-tbl "
+                               id="callBox_message_table">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="border-top-0 r-size">Info</th>
+                                <th scope="col" class="border-top-0 r-size">Time</th>
+                                <th scope="col" class="border-top-0 r-size">Original message</th>
+                                <th scope="col" class="border-top-0 ">Region</th>
+                                <th scope="col" class="border-top-0 r-size">ANI</th>
+                                <th scope="col" class="border-top-0 r-size">Status code</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer py-2 mt-3">
+    <p class="text-center m-0">Copyright ©
+        <script>document.write(new Date().getFullYear());</script>
+        <a href="https://www.caseemergencysystems.com/" target="_blank">Case Answer System</a>. All
+        rights reserved.
+    </p>
+</div>
+<div id="resetPasswordModal"></div>
+<div class="modal fade" id="importCsvModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Import Csv</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="import_call_box_panel" class="import-box">
+                    <form id="import_form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" id="csv_descriptions" placeholder="Description"
+                                      class="form-control required"></textarea>
+                            <strong class="text-danger csv_descriptions"></strong>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Csv</label>
+                            <!-- <div class="upload-btn-wrapper ">
+                                 <button class="btn btn-primary btn-block">
+                                     <i class="fa fa-cloud-upload" style="font-size: 15px !important;"></i>
+                                     Import File
+                                 </button>-->
+                            <input type="file" name="import_csv" class="import_csv" id="import_csv"/>
+                            <!-- </div>-->
+                        </div>
+                        <button type="submit" class="btn bg-lime pull-right">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="InstructionModal" tabindex="-1" role="dialog" aria-labelledby="InstructionModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="InstructionModalLabel">Instruction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="InstructionModalPanel" class="">
+                    <ul class="">
+                        <li>1. When you Import a file if a file region already exists then replace data in that region
+                            <ul>
+                                <li>- Case 1 Example: If System has test_region in the database, we import
+                                    test_region.csv file, all test_region.csv call box data updated in the system.
+                                </li>
+                                <li>- When you insert a CSV file then in its data there is a column name (ANI). if ANI
+                                    column data is present in the database then its data is updated and its status set
+                                    is active. if ANI column data present in the database does not contain in the CSV
+                                    file then its status is set to inactive. if ANI column data in CSV file is absent in
+                                    database then it is inserted in the database and its status is set to active.
+                                </li>
+                                <li>For example test_region.csv
+                                    <ul>
+                                        <li>ANI - 5678 is in a database and also in CSV file then its record will be
+                                            updated and its status will be set to active
+                                        </li>
+                                        <li>ANI - 6789 is in the database and it is absent in the CSV file then its
+                                            status is set to inactive.
+                                        </li>
+                                        <li>ANI - 9879 is absent in the database and it is preset in CSV file then its
+                                            record will be inserted and its status is set to active
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>2. if a file region does not exist then that file region is created and all CSV data is
+                            created on that region
+                            <ul>
+                                <li>- Case 2 Example: If we import test_region_new.csv file, the system does not have
+                                    test_region_new region then the region is created by the system. Data with
+                                    test_region_new region are imported to call box data for the newly created region
+                                    from the CSV file.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>3. region names are case sensitive if in database no matching region found then system
+                            auto-creating a new region.
+                            <ul>
+                                <li>- <u>metrolink</u> and <u>Metrolink</u> are different region</li>
+                                <li>- region selection is not consider in import region. if you select metrolink region
+                                    and try to import Metrolink.csv data then system first check Metrolink region if
+                                    that region not exist then auto-creating a new region and import all csv data in
+                                    that region.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>3. region names are case sensitive if in database no matching region found then system
+                            auto-creating a new region.
+                            <ul>
+                                <li>- <u>metrolink</u> and <u>Metrolink</u> are different region</li>
+                                <li>- region selection is not consider in import region. if you select metrolink region
+                                    and try to import Metrolink.csv data then system first check Metrolink region if
+                                    that region not exist then auto-creating a new region and import all csv data in
+                                    that region.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-2.2.4.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/toastr/toastr.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="vendors/bootstrap-daterangepicker/moment.js"></script>
+<script src="vendors/bootstrap-daterangepicker/moment-timezone-with-data-2012-2022.min.js"></script>
+<script src="js/additional-methods.js"></script>
+<script src="vendors/lodash/lodash.js"></script>
+<!-- Menu -->
+<script src="js/superfish.min.js"></script>
+<!--Encrption-->
+<script src="js/aos.js"></script>
+<script src="js/aes.js"></script>
+<!-- Map -->
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyCCXbxrJcfVRqFmgQLh_llyCXXqX8mDiLQ"
+        type="text/javascript"></script>
+<!-- AWS SDK's-->
+<script src="js/aws/amazon-cognito-auth.min.js"></script>
+<script src="js/aws/aws-sdk-2.7.16.min.js"></script>
+<script src="js/aws/amazon-cognito-identity.min.js"></script>
+<script src="js/aws/config.js"></script>
+<!--Janus-->
+<script src="vendors/mustache/mustache.js"></script>
+<script src="vendors/mustache/mustache-wax.js"></script>
+<!-- Basic js-->
+<script src="js/websocket.js"></script>
+<script src="js/main.js"></script>
+<script src="js/crypto.js"></script>
+<script src="vendors/data-table/jquery.dataTables.min.js"></script>
+<script src="vendors/sweet-alert/sweetalert.js"></script>
+<script src="vendors/csvReader/papaparse.js"></script>
+<script src="js/modules/callbox.js"></script>
+<script src="js/reset_password.js"></script>
+
+</body>
+
+</html>

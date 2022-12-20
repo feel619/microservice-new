@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="vendors/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/chat.css"/>
+
+    <link rel="stylesheet" href="vendors/toastr/toastr.css">
+    <link rel="stylesheet" href="vendors/plyr/plyr.css"/>
+    <meta name="theme-color" content="#fff">
+    <link rel="shortcut icon" href="images/fevicon.png">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Live Videos</title>
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <script>
+        var activeModule = 'home';
+        var connection_type = 'subscriber';
+    </script>
+</head>
+
+<body onbeforeunload=" return 'Are you really want to perform the action?'">
+<div class="loading" id="main_loader">Connecting..</div>
+
+<header id="header">
+    <div class="menu-section">
+        <div class="main-menu">
+            <div id="menu-container" class="align-items-center justify-content-between row no-gutters">
+                <div id="logo" class="logo col-auto"><a href="index.html">
+                    <img src="images/logo.png" alt="logo" title="case"/></a>
+                </div>
+                <div class="row col-3">
+                    <div class="col-md-2 col-form-label text-left text-sm-right">
+                        Region
+                    </div>
+                    <div class="col-md-5">
+                        <select class="form-control" name="region"
+                                id="region_id"></select>
+                    </div>
+                </div>
+                <nav id="nav-menu-container" class="nav-menu-container col-auto">
+
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div style="clear: none;"></div>
+<div class="map-video">
+    <div class="container-fluid home_page all-box-view">
+        <div class="row no-gutters" style="height: 100%">
+            <div id="chat-list-view"
+                 class="col-12 col-md-auto map-over-sec home_page flex-column chat-list-view-home">
+                <div class="chat-list">
+                    <div class="bottom_chat_call_box_view" id="bottom_chat_call_box_view">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md right-map-view" id="home_map">
+                <div class="callBoxStatusOpenPanel" id="callBoxStatusOpenPanel">
+                    <div class="text-right status-open-btn" id="desktop-status-open-btn">
+                        <div class="close-v" id="status-open">Open</div>
+                    </div>
+                </div>
+                <div class="callBoxStatusPanel" id="callBoxStatusPanel">
+
+                    <div class="head row">
+                        <div class="col-12">
+                            <div class="d-flex flex-row ">
+                                <div class="p-2"> <a type="button" class="btn btn-outline-primary btn-link " href="caseAlertClassic.html">Knightscope Alerts Classic</a></div>
+                                <div class="p-2"><a type="button" class="btn btn-outline-primary btn-link " href="caseAlertRealTime.html">Knightscope Alerts real-time</a></div>
+                                <div class="ml-auto p-2">
+                                    <div class="text-right status-close-btn" id="desktop-status-close-btn">
+                                        <div class="close-v" id="status-close">x</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>Operational Statistics</div>
+                        </div>
+                    </div>
+                    <div id="callBoxStatusListPanel" class="head row callBoxStatusListPanel">
+                        <div class="col-12">
+                            <div id="callBoxStatusList">
+                                <div class="callBoxStatusListTotal font-weight-bold" id="callBoxStatusListTotal">
+                                </div>
+                                <div class="callBoxStatusListBlue" id="callBoxStatusListBlue">
+                                    <div id="callBoxStatusListBlueTotal"></div>
+                                </div>
+                                <div class="callBoxStatusListRed" id="callBoxStatusListRed">
+                                    <div id="callBoxStatusListRedTotal"></div>
+                                </div>
+                                <div class="callBoxStatusListYellow" id="callBoxStatusListYellow">
+                                    <div id="callBoxStatusListYellowTotal"></div>
+                                </div>
+                                <div class="callBoxStatusListLightBlue" id="callBoxStatusListLightBlue">
+                                    <div id="callBoxStatusListLightBlueTotal"></div>
+                                </div>
+                                <div class="callBoxStatusListGrey" id="callBoxStatusListGrey">
+                                    <div id="callBoxStatusListGreyTotal"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!----Chat panel --->
+<div id="chat-panel-view" class="content container-fluid bootstrap snippets bootdey chat-panel-view all-box-view">
+    <div class="row g-2">
+        <div class="col-md-6">
+            <div class="bg-white">
+                <div class="d-flex flex-column">
+                    <div class="chat" style="overflow: hidden; outline: none; ">
+                        <div class="col-inside-lg decor-default">
+                            <div class="chat-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6>Chat</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        <button id="endChatBox" class="btn btn-danger ml-1 pull-right"
+                                                onclick="endChatBox()">End
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="chatView" class="chatView">
+                                </div>
+                                <div class="answer-reply">
+                                        <textarea onkeypress="ICDCharMatch(event)" style="text-transform: uppercase"
+                                                  placeholder="What's on your mind..." id="sendMsg"></textarea>
+                                    <button class="">
+                                        <i onclick="sendMessage()" class="fa fa-paper-plane-o "></i>
+                                        <i onclick="infoMessage()" class="fa fa-info-circle right-btn"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chatIntro">
+                        <div class="row">
+                            <div class="col font-weight-bold" id="chat_viewer_demo_channel">
+                                <h3 class="mb-0">Call Box: Tower 1</h3>
+                                <small>Ph: (987)654-3210 </small>
+                            </div>
+                            <div class="col-auto font-weight-bold d-flex justify-content-end">
+                                <div>
+                                    <h4 class="mb-2">CB Display
+                                        <a style="cursor: pointer;right: 35px;top: 10px;" data-toggle="tooltip"
+                                           class="" data-html="true"
+                                           title="CallBox Display Window emulates the actual display of TTY characters at the CallBox.">
+                                            <i class="fa fa-info-circle"></i>
+                                        </a>
+                                    </h4>
+                                    <div class="text-wrap tcp-wrap" id="chat_TCP_panel"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mb-0">
+                <div class="card-header flex-column justify-content-start">
+                    <h5 class="w-100">Annotation</h5>
+                    <!--  <div class="d-flex flex-wrap justify-content-start w-100">
+                      <div class="form-group">
+                          <select class="form-control annotate_filter dropdown"
+                                  name="annotate_classification_id" id="annotate_classification_id">
+                          </select>
+                          <strong class="text-danger annotate_classification_id"></strong>
+                      </div>
+                      <div class="form-group ml-1">
+                          <select class="form-control annotate_filter dropdown" name="annotate_user_id"
+                                  id="annotate_user_id">
+                          </select>
+                          <strong class="text-danger annotate_user_id"></strong>
+                      </div>
+                  </div>-->
+                </div>
+                <div class="card-body chat-care">
+                    <ul class="chat-annotate" id="annotate_listing">
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    Add Annotation
+                    <form id="add_annotate_form">
+                        <div class="form-group">
+                            <div class="hidden_field"></div>
+                            <select class="form-control dropdown" name="classification_id" id="classification_box">
+                                <option value=""> Please Select</option>
+                            </select>
+                            <strong class="text-danger classification_id"></strong>
+                        </div>
+                        <div class="form-group">
+                                <textarea name="note" id="note" placeholder="note"
+                                          class="form-control required"></textarea>
+                            <strong class="text-danger description"></strong>
+                        </div>
+                        <div class="form-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" id="btn-chat">Save</button>
+                                </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-right map-close-btn" id="desktop-chat-close-map-btn">
+                <div class="close-v" id="chat-map-close">x</div>
+            </div>
+            <div id="chat_browser_map" style="width: 100%;height: 100%;"
+                 class="map-thumb mb-2 img-fluid desktop-map map-small"></div>
+        </div>
+    </div>
+</div>
+<div id="side-chat-list-view" style="display: none;" class="map-over-sec video-play-view">
+    <div class="chat-list">
+        <div class="container-fluid">
+            <div class="row gutters-10 gutter-mb side_bar_video_view" id="side_bar_video_view">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer py-2 mt-3">
+    <p class="text-center m-0">Copyright ©
+        <script>
+            document.write(new Date().getFullYear());
+        </script>
+        <a href="https://www.caseemergencysystems.com/" target="_blank">Case Answer System</a>. All
+        rights reserved.
+    </p>
+</div>
+<div id="resetPasswordModal"></div>
+<div class="modal fade" id="shortcutKeyModal" tabindex="-1" role="dialog" aria-labelledby="shortcutKeyModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shortcutKeyModalLabel">Short cut</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="shortcutListPanel" class="">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="AnnotateModal" tabindex="-1" role="dialog" aria-labelledby="AnnotateModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AnnotateModalLabel">Add Annotate</h5>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+             </button>-->
+            </div>
+            <div class="modal-body">
+                <div id="AnnotateModalPanel" class="">
+                    <form id="set_annotate_form">
+                        <div class="form-group">
+                            <div class="hidden_field"></div>
+                            <select class="form-control dropdown" name="classification_id"
+                                    id="set_classification_box">
+                                <option value=""> Please Select</option>
+                            </select>
+                            <strong class="text-danger classification_id"></strong>
+                        </div>
+                        <div class="form-group">
+                                <textarea name="note" id="set_note" placeholder="note"
+                                          class="form-control required"></textarea>
+                            <strong class="text-danger description"></strong>
+                        </div>
+                        <div class="form-group">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" id="set-btn-chat">Save</button>
+                                </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-2.2.4.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/toastr/toastr.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+<!-- Menu -->
+<script src="js/superfish.min.js"></script>
+<!-- Map -->
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyCCXbxrJcfVRqFmgQLh_llyCXXqX8mDiLQ"
+        type="text/javascript"></script>
+<!--Encrption-->
+<script src="js/aos.js"></script>
+<script src="js/aes.js"></script>
+<!-- AWS SDK's-->
+<script src="js/aws/amazon-cognito-auth.min.js"></script>
+<script src="js/aws/aws-sdk-2.7.16.min.js"></script>
+<script src="js/aws/amazon-cognito-identity.min.js"></script>
+<script src="js/aws/config.js"></script>
+<!--Janus-->
+<script src="vendors/shortcutsJs/shortcut.js"></script>
+<script src="vendors/mustache/mustache.js"></script>
+<script src="vendors/mustache/mustache-wax.js"></script>
+<!-- Basic js-->
+<script src="js/websocket.js"></script>
+<script src="js/caseCloudWebsocket.js"></script>
+<script src="js/main.js"></script>
+<script src="js/crypto.js"></script>
+<script src="js/initRegion.js"></script>
+<script src="js/index.js"></script>
+<script src="js/reset_password.js"></script>
+</body>
+
+</html>
