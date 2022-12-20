@@ -491,18 +491,18 @@ function getColumnDef(table_type = 'main') {
                         return ip;
                     } else if (full['status_code'] === 'TTY') {
                         if (ip.includes('52.42.223.34')) {
-                            return 'IP-TTY-CCA-TEST';
+                            return 'IP-TTY-KBC-TEST';
                         } else if (ip.includes('35.155.190.209')) {
-                            return 'IP-TTY-CCT-STG';
+                            return 'IP-TTY-KBCT-STG';
                         } else if (ip.includes('44.235.232.32')) {
-                            return 'IP-TTY-CCT-PROD';
+                            return 'IP-TTY-KBCT-PROD';
                         } else if (ip.includes('131.226.248.168')) {
                             return 'IP-TTY-X15';
                         } else {
                             return ip;
                         }
                     } else {
-                        return ip.includes('131.226.248.168') ? 'X15' : 'CCA'
+                        return ip.includes('131.226.248.168') ? 'X15' : 'KBC'
                     }
                 } else {
                     return '';
