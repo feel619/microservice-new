@@ -36,6 +36,7 @@ let filters = {
     columns = [
         {data: 'region_name', orderable: false, "width": "10%",},
         {data: 'createdAt', orderable: false, "width": "10%",},
+        {data: 'call_box-count', orderable: false, "width": "10%",},
         {data: 'data_voice_rate', className: "text-right", orderable: true, "width": "5%"},
         {data: 'data_voice_success', orderable: true, "width": "5%"},
         {data: 'data_voice_fail', orderable: true, "width": "5%"},
@@ -68,13 +69,14 @@ let filters = {
         {
             "targets": [2],
             render: function (data, type, full) {
-                return (data !== null && data !== '') ? parseFloat(data).toFixed(2) : '';
+                // return (data !== null && data !== '') ? parseFloat(data).toFixed(2) : '';
+                return '-'
             }
         },
         {
             "targets": [3],
             render: function (data, type, full) {
-                return data + ' / ' + full['data_voice_total'];
+                return (data !== null && data !== '') ? parseFloat(data).toFixed(2) : '';
             }
         },
         {
@@ -86,13 +88,13 @@ let filters = {
         {
             "targets": [5],
             render: function (data, type, full) {
-                return (data !== null && data !== '') ? parseFloat(data).toFixed(2) : '';
+                return data + ' / ' + full['data_voice_total'];
             }
         },
         {
             "targets": [6],
             render: function (data, type, full) {
-                return data + ' / ' + full['data_tty_total'];
+                return (data !== null && data !== '') ? parseFloat(data).toFixed(2) : '';
             }
         },
         {
@@ -104,13 +106,13 @@ let filters = {
         {
             "targets": [8],
             render: function (data, type, full) {
-                return (data !== null && data !== '') ? parseFloat(data).toFixed(2) : '';
+                return data + ' / ' + full['data_tty_total'];
             }
         },
         {
             "targets": [9],
             render: function (data, type, full) {
-                return data + ' / ' + full['data_cca_total'];
+                return (data !== null && data !== '') ? parseFloat(data).toFixed(2) : '';
             }
         },
         {
@@ -122,13 +124,13 @@ let filters = {
         {
             "targets": [11],
             render: function (data, type, full) {
-                return (data !== null && data !== '') ? parseFloat(data).toFixed(2) : '';
+                return data + ' / ' + full['data_cca_total'];
             }
         },
         {
             "targets": [12],
             render: function (data, type, full) {
-                return data + ' / ' + full['data_x15_total'];
+                return (data !== null && data !== '') ? parseFloat(data).toFixed(2) : '';
             }
         },
         {
@@ -137,9 +139,15 @@ let filters = {
                 return data + ' / ' + full['data_x15_total'];
             }
         },
+        {
+            "targets": [14],
+            render: function (data, type, full) {
+                return data + ' / ' + full['data_x15_total'];
+            }
+        },
 
     ],
-    order = [14, 'desc'],
+    order = [15, 'desc'],
     dataHighTable = callCaseAlertDataTable('event_log_count_region_table', 'liveMessage/tableListWithEventCount', filters, columns, loadMoreData, columnDefs, order);
 
 function ReloadCallBoxHighStatusTable() {
